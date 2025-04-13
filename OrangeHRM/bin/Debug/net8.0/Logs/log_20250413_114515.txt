@@ -1,0 +1,14 @@
+2025-04-13 11:45:15 [INFO]  Get Auth token using Locator: //input[@type='hidden'] using selector: XPath
+2025-04-13 11:45:15 [INFO]  Element attribute Return for Locator: //div[@class='orangehrm-login-error']//p using selector: XPath Attribute: value
+2025-04-13 11:45:15 [INFO] Clear Element for Locator: //input[@name = 'username'] using selector: XPath
+2025-04-13 11:45:15 [INFO] Sent text value for Locator: //input[@name = 'username'] using selector: XPath with value: Admin
+2025-04-13 11:45:15 [INFO] Clear Element for Locator: //input[@name = 'password'] using selector: XPath
+2025-04-13 11:45:15 [INFO] Sent text value for Locator: //input[@name = 'username'] using selector: XPath with value: admin123
+2025-04-13 11:45:15 [INFO] Click Element for Locator: //button[@type= 'submit'] using selector: XPath
+2025-04-13 11:45:19 [INFO] Clear Element for Locator: //input[@name = 'username'] using selector: XPath
+2025-04-13 11:45:19 [INFO] Sent text value for Locator: //input[@name = 'username'] using selector: XPath with value: Admin
+2025-04-13 11:45:19 [INFO] Clear Element for Locator: //input[@name = 'password'] using selector: XPath
+2025-04-13 11:45:19 [INFO] Sent text value for Locator: //input[@name = 'username'] using selector: XPath with value: admin456
+2025-04-13 11:45:19 [INFO] Click Element for Locator: //button[@type= 'submit'] using selector: XPath
+2025-04-13 11:45:19 [INFO]  Element present check for Locator: //div[@class='orangehrm-login-error']//p using selector: XPath
+2025-04-13 11:45:21 [INFO] String return for  Element for Locator: //div[@class='orangehrm-login-error']//p using selector: XPath
