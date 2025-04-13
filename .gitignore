@@ -1,3 +1,4 @@
 .vs/
 OrangeHRM/bin/
 OrangeHRM/obj/
+*.temp
