@@ -1,6 +1,8 @@
-﻿using OpenQA.Selenium;
+﻿using AventStack.ExtentReports;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OrangeHRM.Framwork.Core;
+using OrangeHRM.Framwork.Support;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
@@ -13,7 +15,14 @@ namespace OrangeHRM.Service.Default
         public IWebDriver driver;
 
         protected string screenshotDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Screenshots");
+        protected ExtentReports _extent;
+        protected ExtentTest Log;
 
+        [OneTimeSetUp]
+        public void SetupReport()
+        {
+            _extent = ExtentManager.GetInstance();
+        }
 
         [SetUp] 
         public void setUp()
@@ -32,6 +41,7 @@ namespace OrangeHRM.Service.Default
             {
                 Directory.CreateDirectory(screenshotDirectory);
             }
+            Log = _extent.CreateTest(TestContext.CurrentContext.Test.Name);
         }
 
         [TearDown]
@@ -39,10 +49,20 @@ namespace OrangeHRM.Service.Default
         {
             if (TestContext.CurrentContext.Result.Outcome.Status == NUnit.Framework.Interfaces.TestStatus.Failed)
             {
-                ScreenshotHelper.TakeScreenshot(driver, TestContext.CurrentContext.Test.Name);
+                string screenshotPath = ScreenshotHelper.CaptureScreenshot(driver, TestContext.CurrentContext.Test.Name);
+                Log.Fail($"Test failed! Screenshot: <a href='{screenshotPath}'>Click Here</a>");
+            }
+            else
+            {
+                Log.Pass("Test passed successfully");
             }
             driver.Quit();
             driver.Dispose();
+        }
+        [OneTimeTearDown]
+        public void TearDownReport()
+        {
+            _extent.Flush();
         }
     }
 }

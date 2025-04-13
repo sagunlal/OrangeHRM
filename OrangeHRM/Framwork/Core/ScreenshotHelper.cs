@@ -9,30 +9,20 @@ namespace OrangeHRM.Framwork.Core
 {
     public static class ScreenshotHelper
     {
-        // Automatically uses the DLL directory for screenshots
-        private static readonly string screenshotDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Screenshots");
-
-        // Call this to take a screenshot
-        public static void TakeScreenshot(IWebDriver driver, string testName)
+        public static string CaptureScreenshot(IWebDriver driver, string testName)
         {
-            try
-            {
-                if (!Directory.Exists(screenshotDirectory))
-                    Directory.CreateDirectory(screenshotDirectory);
+            // Create a directory for screenshots if it doesn't exist
+            string screenshotDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Screenshots");
+            Directory.CreateDirectory(screenshotDir);
 
-                string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                string fileName = $"{testName}_{timestamp}.png";
-                string fullPath = Path.Combine(screenshotDirectory, fileName);
+            // Create a unique filename for each screenshot based on test name and timestamp
+            string screenshotFile = Path.Combine(screenshotDir, $"{testName}_{DateTime.Now:yyyyMMdd_HHmmss}.png");
 
-                Screenshot screenshot = ((ITakesScreenshot)driver).GetScreenshot();
-                screenshot.SaveAsFile(fullPath);
+            // Capture screenshot and save it to the specified file path
+            Screenshot screenshot = ((ITakesScreenshot)driver).GetScreenshot();
+            screenshot.SaveAsFile(screenshotFile);
 
-                Console.WriteLine($"Screenshot saved at: {fullPath}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error taking screenshot: {ex.Message}");
-            }
+            return screenshotFile;
         }
     }
 }

@@ -14,8 +14,7 @@ namespace OrangeHRM
             LoginPage loginPage =new LoginPage(driver);
             DashboardPage dashboardPage =new DashboardPage(driver);
 
-            Console.WriteLine("Authentication Token: " + loginPage.GetHiddenAuthToken());
-            Logger.Info("Authentication Token: " + loginPage.GetHiddenAuthToken());
+            Log.Info("Authentication Token: " + loginPage.GetHiddenAuthToken());
 
             loginPage.ValidLogin();
 
@@ -25,10 +24,7 @@ namespace OrangeHRM
             {
                 if (cookie.Expiry == null)
                 {
-                    Console.WriteLine("Cookie for authentication: " + cookie);
-                    Logger.Info("Cookie for authentication: " + cookie);
-                    Console.WriteLine("------------------------------------------------------");
-                    Logger.Info("------------------------------------------------------");
+                    Log.Info("Cookie for authentication: " + cookie);
                 }
             }
 
@@ -40,7 +36,7 @@ namespace OrangeHRM
             Assert.That(loginPage.IsAlertMessagePresent(), Is.EqualTo(true), "Alert message should be present.");
             Assert.That(loginPage.GetAlertMessage(), Is.EqualTo("Invalid credentials"), "Login should fail for invalid credenrtials");
 
-            //Assert.Fail();
+            Assert.Fail();
 
         }
     }
