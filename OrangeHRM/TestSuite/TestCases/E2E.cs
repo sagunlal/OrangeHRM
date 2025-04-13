@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using OrangeHRM.Framwork.Core;
+using OrangeHRM.Framwork.Support;
 using OrangeHRM.Service.Default;
 using OrangeHRM.Service.PageService;
 
@@ -14,6 +15,7 @@ namespace OrangeHRM
             DashboardPage dashboardPage =new DashboardPage(driver);
 
             Console.WriteLine("Authentication Token: " + loginPage.GetHiddenAuthToken());
+            Logger.Info("Authentication Token: " + loginPage.GetHiddenAuthToken());
 
             loginPage.ValidLogin();
 
@@ -24,7 +26,9 @@ namespace OrangeHRM
                 if (cookie.Expiry == null)
                 {
                     Console.WriteLine("Cookie for authentication: " + cookie);
+                    Logger.Info("Cookie for authentication: " + cookie);
                     Console.WriteLine("------------------------------------------------------");
+                    Logger.Info("------------------------------------------------------");
                 }
             }
 
@@ -35,6 +39,8 @@ namespace OrangeHRM
             loginPage.InvalidLogin();
             Assert.That(loginPage.IsAlertMessagePresent(), Is.EqualTo(true), "Alert message should be present.");
             Assert.That(loginPage.GetAlertMessage(), Is.EqualTo("Invalid credentials"), "Login should fail for invalid credenrtials");
+
+            //Assert.Fail();
 
         }
     }
